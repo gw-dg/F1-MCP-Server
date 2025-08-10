@@ -227,4 +227,4 @@ Your comprehensive F1 MCP server now provides access to all Jolpica F1 API endpo
 
 ---
 
-**Built for F1 fans everywhere!**
+**Built for F1 fans everywhere! #BuildWithPuch**

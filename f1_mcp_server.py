@@ -29,13 +29,6 @@ from mcp.server.auth.provider import AccessToken
 from mcp.types import TextContent, INVALID_PARAMS, INTERNAL_ERROR
 from pydantic import BaseModel, Field
 
-# Data processing imports
-try:
-    import pandas as pd
-    PANDAS_AVAILABLE = True
-except ImportError:
-    PANDAS_AVAILABLE = False
-    print("WARNING: Pandas not available. Limited data processing.")
 
 # --- Load environment variables ---
 load_dotenv()
@@ -243,6 +236,24 @@ async def validate() -> str:
         raise ValueError("MY_NUMBER environment variable must be set")
     logger.info(f"Validation successful, returning number: {MY_NUMBER}")
     return MY_NUMBER
+
+@mcp.tool(description="Get information about the Formula 1 MCP Server capabilities and features.")
+async def about() -> dict[str, str]:
+    """Get information about the F1 MCP Server"""
+    server_name = "Formula 1 MCP Server"
+    server_description = """🏎️ Formula 1 in your pocket 🏁
+
+Comprehensive F1 MCP server providing complete access to Formula 1 data through WhatsApp via Puch.ai. 
+
+Built with Jolpica F1 API for real-time race information, championship standings, historical data, driver profiles, race analysis, and F1 trivia.
+
+21 F1 tools covering live races, historical seasons, driver comparisons, qualifying results, pit stops, lap times, and sprint races from 1950 to present.
+    """.strip()
+
+    return {
+        "name": server_name,
+        "description": server_description
+    }
 
 # --- F1 MCP Tools ---
 
@@ -1585,7 +1596,6 @@ async def main():
         
         # Log environment configuration
         logger.info("Environment Configuration:")
-        logger.info(f"- Pandas Available: {PANDAS_AVAILABLE}")
         logger.info(f"- Current Year: {CURRENT_YEAR}")
         logger.info(f"- Server Host: {MCP_SERVER_HOST}")
         logger.info(f"- Server Port: {MCP_SERVER_PORT}")

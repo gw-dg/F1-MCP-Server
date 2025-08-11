@@ -16,5 +16,3 @@ pydantic>=2.0.0
 # Async Support
 asyncio
 
-# Data Analysis (for processing API responses)
-pandas>=1.5.0
